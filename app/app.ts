@@ -4,6 +4,12 @@ You can use this file to perform app-level initialization, but the primary
 purpose of the file is to pass control to the app’s first module.
 */
 
+
+import { elmNative } from "./elm-native";
+import ElmApp from  "./compiled-elm.js";
+elmNative(ElmApp, {});
+
+
 import * as application from "tns-core-modules/application";
 
 application.run({ moduleName: "app-root" });
