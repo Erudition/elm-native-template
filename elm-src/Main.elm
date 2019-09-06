@@ -36,7 +36,9 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    page [] [ label [ text "Hello World!" ] [] ]
+    page []
+        [ stackLayout [] [ label [ text "Hello World!" ] [] ]
+        ]
 
 
 
@@ -50,6 +52,11 @@ view model =
 page : List (Attribute msg) -> List (Html msg) -> Html msg
 page attributes children =
     node "page" attributes children
+
+
+stackLayout : List (Attribute msg) -> List (Html msg) -> Html msg
+stackLayout attributes children =
+    node "stackLayout" attributes children
 
 
 label : List (Attribute msg) -> List (Html msg) -> Html msg
