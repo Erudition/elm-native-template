@@ -20,9 +20,11 @@ function installGlobalShims(): ElmNativeDocument {
     window.window = global;
     window.document = new ElmNativeDocument();
 
-    window.requestAnimationFrame = (action: () => {}) => {
-        setTimeout(action, 33); //about 30 fps
-    }
+    // Elm already uses solution below! BUT
+    // TODO use NS version someone implemented online (check issues)
+    // window.requestAnimationFrame = (action: () => {}) => {
+    //     setTimeout(action, 33); //about 30 fps
+    // }
 
     window.getComputedStyle = (node: NativeElementNode) => {
         return node.nativeView.style;

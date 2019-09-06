@@ -10,18 +10,22 @@ declare global {
     }
 }
 
-export function elmNative(startPage: typeof ElmComponent, data: any): Promise<ElmComponent> {
+export function elmNative(elmApp: typeof ElmComponent, data: any): Promise<ElmComponent> {
     initializeDom();
 
     //setup a frame so we always have somewhere to hang our css
     let rootFrame = createElement('frame') as FrameElement;
     rootFrame.setAttribute("id", "app-root-frame");
 
-    let pageInstance = navigate({
-        page: startPage,
-        props: data || {},
-        frame: rootFrame
-    })
+    // let pageInstance = navigate({
+    //     page: startPage,
+    //     props: data || {},
+    //     frame: rootFrame
+    // })
+
+    var pageInstance = elmApp.init({
+      node: rootFrame
+    });
 
     return new Promise((resolve, reject) => {
         //wait for launch

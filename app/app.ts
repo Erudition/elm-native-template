@@ -6,13 +6,15 @@ purpose of the file is to pass control to the app’s first module.
 
 
 import { elmNative } from "./elm-native";
-import ElmApp from  "./compiled-elm.js";
-elmNative(ElmApp, {});
+const elmApp = require("./compiled-elm.js").Elm.Main;
 
 
-import * as application from "tns-core-modules/application";
+elmNative(elmApp, {});
 
-application.run({ moduleName: "app-root" });
+
+// import * as application from "tns-core-modules/application";
+//
+// application.run({ moduleName: "app-root" });
 
 /*
 Do not place any code after the application has been started as it will not
