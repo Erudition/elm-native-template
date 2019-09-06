@@ -3,14 +3,14 @@ import { navigate, ViewNode, createElement, initializeDom, FrameElement } from '
 
 
 declare global {
-    export class SvelteComponent {
+    export class ElmComponent {
         $destroy(): void;
         constructor(options: { target?: ViewNode, props?: any, anchor?: ViewNode, intro?: boolean });
         $set(props: any): void;
     }
 }
 
-export function svelteNative(startPage: typeof SvelteComponent, data: any): Promise<SvelteComponent> {
+export function elmNative(startPage: typeof ElmComponent, data: any): Promise<ElmComponent> {
     initializeDom();
 
     //setup a frame so we always have somewhere to hang our css

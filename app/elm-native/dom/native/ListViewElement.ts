@@ -1,6 +1,6 @@
 import { ListView, ItemEventData, ItemsSource } from 'tns-core-modules/ui/list-view'
 import NativeElementNode from "./NativeElementNode";
-import TemplateElement from '../svelte/TemplateElement';
+import TemplateElement from '../elm/TemplateElement';
 import { createElement, logger as log } from '../basicdom';
 
 
@@ -27,7 +27,7 @@ export default class ListViewElement extends NativeElementNode {
             item = (items as any)[args.index]
         }
 
-        if (!args.view || !(args.view as any).__SvelteComponent__) {
+        if (!args.view || !(args.view as any).__ElmComponent__) {
             log.debug(`creating view for item at ${args.index}`)
             let wrapper = createElement('StackLayout') as NativeElementNode;
             let componentInstance = new (this.itemTemplateComponent)({
@@ -39,16 +39,16 @@ export default class ListViewElement extends NativeElementNode {
             });
 
             let nativeEl = wrapper.nativeView;
-            (nativeEl as any).__SvelteComponent__ = componentInstance;
+            (nativeEl as any).__ElmComponent__ = componentInstance;
             args.view = nativeEl;
         } else {
-            let componentInstance: SvelteComponent = (args.view as any).__SvelteComponent__
+            let componentInstance: ElmComponent = (args.view as any).__ElmComponent__
             log.debug(`updating view for ${args.index} which is a ${args.view}`)
             componentInstance.$set({ item })
         }
     }
 
-    get itemTemplateComponent(): typeof SvelteComponent {
+    get itemTemplateComponent(): typeof ElmComponent {
         const templateNode = this.childNodes.find(x => x instanceof TemplateElement) as TemplateElement
         return templateNode ? templateNode.component : null;
     }

@@ -1,5 +1,4 @@
 
 declare module "*.svelte" {
-    export default SvelteComponent;
+    export default ElmComponent;
 }
-

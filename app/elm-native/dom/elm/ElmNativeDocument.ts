@@ -1,7 +1,7 @@
 
 import { DocumentNode, ElementNode, createElement, TextNode, logger as log } from '../basicdom';
 
-export default class SvelteNativeDocument extends DocumentNode {
+export default class ElmNativeDocument extends DocumentNode {
     head: ElementNode;
     constructor() {
         super()

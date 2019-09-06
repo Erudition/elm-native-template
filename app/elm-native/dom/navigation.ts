@@ -5,7 +5,7 @@ import PageElement from "./native/PageElement";
 import NativeElementNode from "./native/NativeElementNode";
 
 export type FrameSpec = Frame | FrameElement | string
-export type PageSpec = typeof SvelteComponent;
+export type PageSpec = typeof ElmComponent;
 export interface NavigationOptions {
     page: PageSpec;
     props?: any;
@@ -31,7 +31,7 @@ function resolveFrame(frameSpec: FrameSpec): Frame {
     return targetFrame;
 }
 
-interface ComponentInstanceInfo { element: NativeElementNode, pageInstance: SvelteComponent }
+interface ComponentInstanceInfo { element: NativeElementNode, pageInstance: ElmComponent }
 
 function resolveComponentElement(pageSpec: PageSpec, props?: any): ComponentInstanceInfo {
     let dummy = createElement('fragment');
@@ -40,7 +40,7 @@ function resolveComponentElement(pageSpec: PageSpec, props?: any): ComponentInst
     return { element, pageInstance }
 }
 
-export function navigate(options: NavigationOptions): SvelteComponent {
+export function navigate(options: NavigationOptions): ElmComponent {
     let { frame, page, props = {}, ...navOptions } = options;
 
     let targetFrame = resolveFrame(frame);
@@ -49,13 +49,13 @@ export function navigate(options: NavigationOptions): SvelteComponent {
         throw new Error("navigate requires frame option to be a native Frame, a FrameElement, a frame Id, or null")
     }
     if (!page) {
-        throw new Error("navigate requires page to be set to the svelte component class that implements the page or reference to a page element")
+        throw new Error("navigate requires page to be set to the elm component class that implements the page or reference to a page element")
     }
 
     let { element, pageInstance } = resolveComponentElement(page, props);
 
     if (!(element instanceof PageElement))
-        throw new Error("navigate requires a svelte component with a page element at the root")
+        throw new Error("navigate requires a elm component with a page element at the root")
 
     let nativePage = element.nativeView;
 

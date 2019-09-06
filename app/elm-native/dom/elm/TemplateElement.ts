@@ -5,11 +5,11 @@ export default class TemplateElement extends ElementNode {
         super('template');
     }
 
-    set component(value: typeof SvelteComponent) {
+    set component(value: typeof ElmComponent) {
         this.setAttribute('component', value)
     }
 
-    get component(): typeof SvelteComponent {
+    get component(): typeof ElmComponent {
         return this.getAttribute('component')
     }
 }

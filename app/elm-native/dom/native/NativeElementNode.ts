@@ -46,7 +46,7 @@ export default class NativeElementNode extends ElementNode {
         this._meta = Object.assign({}, defaultViewMeta, meta || {});
 
         this._nativeView = new (viewClass as any)();
-        (this._nativeView as any).__SvelteNativeElement__ = this;
+        (this._nativeView as any).__ElmNativeElement__ = this;
 
         log.debug(`created ${this} ${this._nativeView}`)
 
@@ -62,7 +62,7 @@ export default class NativeElementNode extends ElementNode {
 
         let getParentPage = (): NativeElementNode => {
             if (this.nativeView && this.nativeView.page) {
-                return (this.nativeView.page as any).__SvelteNativeElement__;
+                return (this.nativeView.page as any).__ElmNativeElement__;
             }
             return null;
         }
@@ -342,7 +342,7 @@ function insertChild(parentNode: ViewNode, childNode: ViewNode, atIndex = -1) {
 
     if (parentView instanceof LayoutBase) {
         if (atIndex >= 0) {
-            //our dom includes "textNode" and "commentNode" which does not appear in the nativeview's children. 
+            //our dom includes "textNode" and "commentNode" which does not appear in the nativeview's children.
             //we recalculate the index required for the insert operation buy only including native element nodes in the count
             let nativeIndex = parentNode.childNodes.filter(e => e instanceof NativeElementNode).indexOf(childNode)
             parentView.insertChild(childView, nativeIndex);

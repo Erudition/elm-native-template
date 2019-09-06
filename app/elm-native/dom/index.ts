@@ -1,24 +1,24 @@
-import { registerSvelteElements } from './svelte-elements'
+//import { registerElmElements } from './elm-elements'
 import { registerNativeElements } from './nativescript-elements'
-import SvelteNativeDocument from './svelte/SvelteNativeDocument'
+import ElmNativeDocument from './elm/ElmNativeDocument'
 import NativeElementNode from './native/NativeElementNode'
 import { write, messageType } from 'tns-core-modules/trace'
 import { logger, LogLevel } from './basicdom'
 
 export { default as FrameElement } from "./native/FrameElement"
-export { default as SvelteNativeDocument } from './svelte/SvelteNativeDocument'
+export { default as ElmNativeDocument } from './elm/ElmNativeDocument'
 export { default as NativeElementNode } from './native/NativeElementNode'
 export { registerElement, createElement, ViewNode } from './basicdom'
 export { navigate, goBack, showModal, closeModal, ShowModalOptions, NavigationOptions, BackNavigationOptions } from './navigation'
 
 
-function installGlobalShims(): SvelteNativeDocument {
+function installGlobalShims(): ElmNativeDocument {
 
-    //expose our fake dom as global document for svelte components
+    //expose our fake dom as global document for elm components
     let window = global as any;
 
     window.window = global;
-    window.document = new SvelteNativeDocument();
+    window.document = new ElmNativeDocument();
 
     window.requestAnimationFrame = (action: () => {}) => {
         setTimeout(action, 33); //about 30 fps
@@ -40,7 +40,7 @@ function installGlobalShims(): SvelteNativeDocument {
         type: string;
         constructor(name: string, detail: any = null) {
             this.eventName = name; //event name for nativescript
-            this.type = name; // type for svelte
+            this.type = name; // type for elm
             this.detail = detail;
         }
     }
@@ -48,7 +48,7 @@ function installGlobalShims(): SvelteNativeDocument {
     return window.document;
 }
 
-export const DomTraceCategory = 'SvelteNativeDom'
+export const DomTraceCategory = 'ElmNativeDom'
 
 function initializeLogger() {
     logger.setHandler((message, level) => {
@@ -65,7 +65,7 @@ function initializeLogger() {
 
 export function initializeDom() {
     initializeLogger();
-    registerSvelteElements();
+    //registerElmElements();
     registerNativeElements();
     return installGlobalShims();
 }
