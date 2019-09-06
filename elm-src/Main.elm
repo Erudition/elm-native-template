@@ -1,7 +1,8 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html, button, div, text)
+import Html exposing (Attribute, Html, node)
+import Html.Attributes exposing (attribute)
 import Html.Events exposing (onClick)
 
 
@@ -35,11 +36,30 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ button [ onClick Increment ] [ text "+1" ]
-        , div [] [ text <| String.fromInt model.count ]
-        , button [ onClick Decrement ] [ text "-1" ]
-        ]
+    page [] [ label [ text "Hello World!" ] [] ]
+
+
+
+--
+-- [ button [ onClick Increment ] [ text "+1" ]
+-- , div [] [ text <| String.fromInt model.count ]
+-- , button [ onClick Decrement ] [ text "-1" ]
+-- ]
+
+
+page : List (Attribute msg) -> List (Html msg) -> Html msg
+page attributes children =
+    node "page" attributes children
+
+
+label : List (Attribute msg) -> List (Html msg) -> Html msg
+label attributes children =
+    node "label" attributes children
+
+
+text : String -> Attribute msg
+text string =
+    attribute "text" string
 
 
 main : Program () Model Msg

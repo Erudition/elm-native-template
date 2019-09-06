@@ -12,7 +12,7 @@ declare global {
 
 export function elmNative(elmApp: typeof ElmComponent, data: any): Promise<ElmComponent> {
     initializeDom();
-
+    console.warn("HEY I'M IN elmNative and doc is " + window.document);
     //setup a frame so we always have somewhere to hang our css
     let rootFrame = createElement('frame') as FrameElement;
     rootFrame.setAttribute("id", "app-root-frame");
@@ -22,7 +22,7 @@ export function elmNative(elmApp: typeof ElmComponent, data: any): Promise<ElmCo
     //     props: data || {},
     //     frame: rootFrame
     // })
-
+    elmApp = require("../compiled-elm.js").Elm.Main;
     var pageInstance = elmApp.init({
       node: rootFrame
     });

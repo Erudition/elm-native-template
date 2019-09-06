@@ -6,7 +6,7 @@ import TemplateElement from "./elm/TemplateElement";
 // Dom elements that elm expect to be able to create or use.
 // or custom additions to make life easier
 
-export function registerSvelteElements() {
+export function registerElmElements() {
     registerElement('head', () => new HeadElement());
     registerElement('style', () => new StyleElement());
     registerElement('fragment', () => new ElementNode('fragment'));

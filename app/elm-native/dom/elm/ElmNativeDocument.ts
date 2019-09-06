@@ -18,6 +18,7 @@ export default class ElmNativeDocument extends DocumentNode {
         return el;
     }
 
+
     createElementNS(namespace: string, tagName: string): ElementNode {
         return this.createElement(tagName);
     }

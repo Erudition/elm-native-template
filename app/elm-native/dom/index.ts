@@ -1,4 +1,4 @@
-//import { registerElmElements } from './elm-elements'
+import { registerElmElements } from './elm-elements'
 import { registerNativeElements } from './nativescript-elements'
 import ElmNativeDocument from './elm/ElmNativeDocument'
 import NativeElementNode from './native/NativeElementNode'
@@ -14,11 +14,11 @@ export { navigate, goBack, showModal, closeModal, ShowModalOptions, NavigationOp
 
 function installGlobalShims(): ElmNativeDocument {
 
-    //expose our fake dom as global document for elm components
+    //expose our fake dom as global document for elm
     let window = global as any;
 
     window.window = global;
-    window.document = new ElmNativeDocument();
+    window.document = new ElmNativeDocument(); // EN: was window.document, Elm wants "document"
 
     // Elm already uses solution below! BUT
     // TODO use NS version someone implemented online (check issues)
@@ -46,7 +46,7 @@ function installGlobalShims(): ElmNativeDocument {
             this.detail = detail;
         }
     }
-
+    console.log("HEY I'M IN installGlobalShims and doc is ", window.document);
     return window.document;
 }
 
@@ -67,7 +67,7 @@ function initializeLogger() {
 
 export function initializeDom() {
     initializeLogger();
-    //registerElmElements();
+    registerElmElements();
     registerNativeElements();
     return installGlobalShims();
 }

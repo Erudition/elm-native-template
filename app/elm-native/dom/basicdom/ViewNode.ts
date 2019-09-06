@@ -24,7 +24,7 @@ export default class ViewNode {
     prevSibling: ViewNode;
     nextSibling: ViewNode;
     _ownerDocument: DocumentNode;
-    _attributes: { [index: string]: any };
+    attributes: { [index: string]: any };
 
     constructor() {
         this.nodeType = null
@@ -35,15 +35,15 @@ export default class ViewNode {
         this.nextSibling = null
 
         this._ownerDocument = null
-        this._attributes = {};
+        this.attributes = {}; // was _attributes, but Elm does node.attributes.length, so trying in place
     }
 
     hasAttribute(name: string) {
-        return Object.keys(this._attributes).indexOf(name) > -1;
+        return Object.keys(this.attributes).indexOf(name) > -1;
     }
 
     removeAttribute(name: string) {
-        delete this._attributes[name];
+        delete this.attributes[name];
     }
 
     /* istanbul ignore next */
@@ -84,12 +84,12 @@ export default class ViewNode {
     }
 
     getAttribute(key: string): any {
-        return this._attributes[key]
+        return this.attributes[key]
     }
 
     /* istanbul ignore next */
     setAttribute(key: string, value: any) {
-        this._attributes[key] = value;
+        this.attributes[key] = value;
     }
 
     /* istanbul ignore next */

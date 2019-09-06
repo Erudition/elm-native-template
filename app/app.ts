@@ -6,11 +6,11 @@ purpose of the file is to pass control to the app’s first module.
 
 
 import { elmNative } from "./elm-native";
-const elmApp = require("./compiled-elm.js").Elm.Main;
+var elmApp;
 
-
+console.warn("Before elmNative and doc is ");
 elmNative(elmApp, {});
-
+console.warn("After elmNative and doc is ");
 
 // import * as application from "tns-core-modules/application";
 //
