@@ -49,6 +49,7 @@ export default class NativeElementNode extends ElementNode {
         (this._nativeView as any).__ElmNativeElement__ = this;
 
         log.debug(`created ${this} ${this._nativeView}`)
+        console.log(`created ${this} ${this._nativeView}`)
 
         //TODO these style shims mess up the code, extract to external modules
 
@@ -363,6 +364,7 @@ function insertChild(parentNode: ViewNode, childNode: ViewNode, atIndex = -1) {
         parentView.content = childView;
         return;
     }
+
 
     throw new Error("Parent can't contain children: " + parentNode + ", " + childNode);
 

@@ -18,7 +18,7 @@ function installGlobalShims(): ElmNativeDocument {
     let window = global as any;
 
     window.window = global;
-    window.document = new ElmNativeDocument(); // EN: was window.document, Elm wants "document"
+    window.document = new ElmNativeDocument(); 
 
     // Elm already uses solution below! BUT
     // TODO use NS version someone implemented online (check issues)
