@@ -51,17 +51,17 @@ view model =
 
 page : List (Attribute msg) -> List (Html msg) -> Html msg
 page attributes children =
-    node "page" attributes children
+    node "Page" attributes children
 
 
 stackLayout : List (Attribute msg) -> List (Html msg) -> Html msg
 stackLayout attributes children =
-    node "stackLayout" attributes children
+    node "StackLayout" attributes children
 
 
 label : List (Attribute msg) -> List (Html msg) -> Html msg
 label attributes children =
-    node "label" attributes children
+    node "Label" attributes children
 
 
 text : String -> Attribute msg
